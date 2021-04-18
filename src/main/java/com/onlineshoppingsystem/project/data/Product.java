@@ -2,9 +2,10 @@ package com.onlineshoppingsystem.project.data;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Data
-@Entity
+@Entity(name = "Product")
 @NoArgsConstructor
 public class Product {
     @Id
@@ -15,16 +16,13 @@ public class Product {
     private int quantity;
     private String type;
     private String name;
-    private String group;
-    private String subgroup;
 
-    public Product(float price,int quantity,String type,String name,String group,String subgroup, int id){
+    public Product(float price, int quantity, String type, String name, int id){
         this.price = price;
         this.quantity = quantity;
         this.type = type;
         this.name = name;
-        this.group = group;
-        this.subgroup = subgroup;
         this.id = id;
+
     }
 }
