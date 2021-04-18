@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Entity
-@Table(name = "cart")
+@Entity(name = "cart")
 @NoArgsConstructor
 public class Cart {
     @Id
@@ -24,3 +23,4 @@ public class Cart {
         this.total = total;
         this.product = product;
     }
+}
