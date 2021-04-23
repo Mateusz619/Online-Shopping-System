@@ -19,8 +19,8 @@ public class UserController {
     public ResponseEntity getAllUser(){return ResponseEntity.ok(userRepository.findAll());}
 
     @GetMapping(value = "user/{id}")
-    public ResponseEntity getUserById(@PathVariable long id){
-        return userRepository.findAllById(id).orElseThrow(() -> new RuntimeException("User doesn't exist"));
+    public User getUserById(@PathVariable long id){
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User doesn't exist"));
     }
 
     @DeleteMapping(value = "delete/{user}")
@@ -43,7 +43,7 @@ public class UserController {
     }
     @PostMapping(value = "user")
     public ResponseEntity<User> saveUser(@RequestBody UserDTO userDTO){
-        User user = new User(userDTO.getId(), userDTO.getUsername(),userDTO.getPassword());
+        User user = new User(userDTO.getUsername(),userDTO.getPassword());
         return ResponseEntity.ok(userRepository.save(user));
     }
 }
