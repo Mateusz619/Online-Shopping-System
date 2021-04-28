@@ -20,4 +20,5 @@ public class ProjectApplication {
 			productRepository.save(new Product("Laptop", "HP", 2500, 10));
 		};
 	}
+
 }

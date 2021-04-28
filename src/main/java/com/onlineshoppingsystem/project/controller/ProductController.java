@@ -1,7 +1,7 @@
 package com.onlineshoppingsystem.project.controller;
 
 import com.onlineshoppingsystem.project.data.Product;
-import com.onlineshoppingsystem.project.dto.ProductDTO;
+import model.ProductDTO;
 import com.onlineshoppingsystem.project.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

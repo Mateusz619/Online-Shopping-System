@@ -1,4 +1,4 @@
-package com.onlineshoppingsystem.project.dto;
+package model;
 
 import lombok.Data;
 

@@ -1,0 +1,48 @@
+package model;
+
+import com.onlineshoppingsystem.project.data.User;
+import com.onlineshoppingsystem.project.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.StreamSupport.stream;
+
+@Service
+public class UserService {
+    private final UserRepository userRepository;
+
+    @Autowired
+    UserService(UserRepository userRepository){this.userRepository=userRepository;}
+
+    public UserHTTPResponse getUser(long id){
+        User user = userRepository.findById(id).get();
+        UserHTTPResponse response = UserMapper.map(user);
+        return response;
+    }
+    public List<UserHTTPResponse> getAllUsers(User user){
+        return stream(userRepository.findAll().spliterator(),false)
+                .map(x->UserMapper.map(x))
+                .collect(Collectors.toList());
+    }
+    public boolean delete(long id){
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+    public String update(long id, UserHTTPRequest user){
+        User userEntity = UserMapper.map(user);
+        userEntity.setId(id);
+        User user1 = userRepository.save(userEntity);
+        return String.valueOf(user1.getId());
+    }
+    public String create(UserHTTPRequest user){
+        User userEntity = UserMapper.map(user);
+        User user1 = userRepository.save(userEntity);
+        return  String.valueOf(user1.getId());
+    }
+}
