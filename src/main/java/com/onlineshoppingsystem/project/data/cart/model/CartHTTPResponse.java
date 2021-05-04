@@ -1,26 +1,50 @@
 package com.onlineshoppingsystem.project.data.cart.model;
 
-import lombok.Builder;
+
+import com.onlineshoppingsystem.project.data.Product;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 public class CartHTTPResponse {
-    private int quantity;
-    private float total;
-    private String products;
+    private Product product;
     private long id;
 
-    public CartHTTPResponse(int quantity, float total, String products, int id) {
-        this.quantity = quantity;
-        this.total = total;
-        this.products = products;
+    public CartHTTPResponse( Product product, long id) {
+
+        this.product.equals(product);
         this.id = id;
     }
 
+    public static CartHTTPResponseBuilder builder() {
+        return new CartHTTPResponseBuilder();
+    }
 
+    public static final class CartHTTPResponseBuilder {
+        private Product product;
+        private long id;
+
+        private CartHTTPResponseBuilder() {
+        }
+
+        public CartHTTPResponseBuilder product(Product product) {
+            this.product = product;
+            return this;
+        }
+
+        public CartHTTPResponseBuilder id(long id) {
+            this.id = id;
+            return this;
+        }
+
+        public CartHTTPResponse build() {
+            return new CartHTTPResponse(product, id);
+        }
+    }
+
+
+    // dodac wewnetrzny builder
 
 
  }
