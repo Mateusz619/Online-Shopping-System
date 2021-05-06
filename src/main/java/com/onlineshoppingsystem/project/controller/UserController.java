@@ -1,7 +1,6 @@
 package com.onlineshoppingsystem.project.controller;
 
 import com.onlineshoppingsystem.project.data.User;
-import com.onlineshoppingsystem.project.dto.UserDTO;
 import com.onlineshoppingsystem.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,10 +39,5 @@ public class UserController {
                     newUser.setId(id);
                     return  userRepository.save(newUser);
                 });
-    }
-    @PostMapping(value = "user")
-    public ResponseEntity<User> saveUser(@RequestBody UserDTO userDTO){
-        User user = new User(userDTO.getUsername(),userDTO.getPassword());
-        return ResponseEntity.ok(userRepository.save(user));
     }
 }

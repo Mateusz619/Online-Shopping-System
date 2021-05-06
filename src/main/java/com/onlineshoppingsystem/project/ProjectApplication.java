@@ -1,7 +1,9 @@
 package com.onlineshoppingsystem.project;
 
 import com.onlineshoppingsystem.project.data.Product;
+import com.onlineshoppingsystem.project.data.User;
 import com.onlineshoppingsystem.project.repository.ProductRepository;
+import com.onlineshoppingsystem.project.repository.UserRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,9 +17,10 @@ public class ProjectApplication {
 	}
 
 	@Bean
-	public ApplicationRunner init(ProductRepository productRepository){
+	public ApplicationRunner init(ProductRepository productRepository, UserRepository userRepository){
 		return args -> {
-			productRepository.save(new Product("Laptop", "HP", 2500, 10));
+			userRepository.save(new User("test", "test"));
+			productRepository.save(new Product("Laptop", "HP", 2500));
 		};
 	}
 }
