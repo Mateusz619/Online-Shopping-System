@@ -4,7 +4,7 @@ import com.onlineshoppingsystem.project.data.User;
 
 public class UserMapper {
     public static UserHTTPResponse map(User user){
-        return UserHTTPResponseBuilder.builder()
+        return UserHTTPResponse.builder()
                 .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())

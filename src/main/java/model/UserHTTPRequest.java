@@ -25,12 +25,12 @@ public class UserHTTPRequest {
             return new UserHTTPRequestBuilder();
         }
 
-        public UserHTTPRequestBuilder withUsername(String username) {
+        public UserHTTPRequestBuilder username(String username) {
             this.username = username;
             return this;
         }
 
-        public UserHTTPRequestBuilder withPassword(String password) {
+        public UserHTTPRequestBuilder password(String password) {
             this.password = password;
             return this;
         }
