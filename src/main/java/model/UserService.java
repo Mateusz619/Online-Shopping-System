@@ -15,34 +15,38 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    UserService(UserRepository userRepository){this.userRepository=userRepository;}
+    UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-    public UserHTTPResponse getUser(long id){
+    public UserHTTPResponse getUserById(long id) {
         User user = userRepository.findById(id).get();
         UserHTTPResponse response = UserMapper.map(user);
         return response;
     }
-    public List<UserHTTPResponse> getAllUsers(User user){
-        return stream(userRepository.findAll().spliterator(),false)
-                .map(x->UserMapper.map(x))
+
+    public List<UserHTTPResponse> getAllUsers(User user) {
+        return stream(userRepository.findAll().spliterator(), false)
+                .map(x -> UserMapper.map(x))
                 .collect(Collectors.toList());
     }
-    public boolean delete(long id){
-        if(userRepository.existsById(id)){
+
+    public boolean delete(long id) {
+        if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;
         }
         return false;
     }
-    public String update(long id, UserHTTPRequest user){
-        User userEntity = UserMapper.map(user);
-        userEntity.setId(id);
-        User user1 = userRepository.save(userEntity);
-        return String.valueOf(user1.getId());
+
+    public void update(long id, UserHTTPRequest userHTTPRequest) {
+        User user = UserMapper.map(userHTTPRequest);
+        user.setId(id);
+        userRepository.save(user);
     }
-    public String create(UserHTTPRequest user){
-        User userEntity = UserMapper.map(user);
-        User user1 = userRepository.save(userEntity);
-        return  String.valueOf(user1.getId());
+
+    public void create(UserHTTPRequest userHTTPRequest) {
+        User user = UserMapper.map(userHTTPRequest);
+        userRepository.save(user);
     }
 }

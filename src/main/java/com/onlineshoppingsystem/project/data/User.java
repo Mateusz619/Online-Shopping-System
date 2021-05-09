@@ -14,18 +14,24 @@ public class User {
     private long id;
     private String username;
     private String password;
+    private String firstName;
+    private String surname;
 
     User(){
     }
-    public User(String username, String password){
+    public User(String username, String password, String firstName, String surname){
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.surname = surname;
     }
     public static UserBuilder userBuilder(){return new UserBuilder();}
     public static final class UserBuilder {
         private long id;
         private String username;
         private String password;
+        private String firstName;
+        private String surname;
 
         private UserBuilder() {
         }
@@ -44,12 +50,22 @@ public class User {
             this.password = password;
             return this;
         }
+        public UserBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+        public UserBuilder surname(String surname){
+            this.surname = surname;
+            return this;
+        }
 
         public User build() {
             User user = new User();
             user.setId(id);
             user.setUsername(username);
             user.setPassword(password);
+            user.setFirstName(firstName);
+            user.setSurname(surname);
             return user;
         }
     }

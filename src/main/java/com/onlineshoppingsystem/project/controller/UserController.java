@@ -1,49 +1,46 @@
 package com.onlineshoppingsystem.project.controller;
 
 import com.onlineshoppingsystem.project.data.User;
-import model.UserDTO;
-import com.onlineshoppingsystem.project.repository.UserRepository;
+import model.UserHTTPRequest;
+import model.UserHTTPResponse;
+import model.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
 
+
+    private final UserService userService;
+
     @Autowired
-    UserRepository userRepository;
-    private Long id;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
 
     @GetMapping(value = "users")
-    public ResponseEntity getAllUser(){return ResponseEntity.ok(userRepository.findAll());}
+    public List<UserHTTPResponse> getAllUsers(@PathVariable User id) {
+        return userService.getAllUsers(id);
+    }
 
     @GetMapping(value = "user/{id}")
-    public User getUserById(@PathVariable long id){
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User doesn't exist"));
+    public UserHTTPResponse getUserById(@PathVariable long id){
+        return userService.getUserById(id);
     }
 
     @DeleteMapping(value = "delete/{user}")
     public void deleteByUserId(Long id){
-        userRepository.deleteById(id);
+        userService.delete(id);
     }
     @PutMapping(value = "update/{user}")
-    public User updateByUserId(@RequestBody User newUser, @PathVariable long id){
-        return userRepository.findById(id)
-                .map(element -> {
-                    element.setId(newUser.getId());
-                    element.setUsername(newUser.getUsername());
-                    element.setPassword(newUser.getPassword());
-                    return userRepository.save(element);
-                })
-                .orElseGet(() -> {
-                    newUser.setId(id);
-                    return  userRepository.save(newUser);
-                });
+    public void updateByUserId(@PathVariable long id, @RequestBody UserHTTPRequest userHTTPRequest){
+        userService.update(id, userHTTPRequest);
     }
     @PostMapping(value = "user")
-    public ResponseEntity<User> saveUser(@RequestBody UserDTO userDTO){
-        User user = new User(userDTO.getUsername(),userDTO.getPassword());
-        return ResponseEntity.ok(userRepository.save(user));
+    public void saveUser(@RequestBody UserHTTPRequest userHTTPRequest){
+        userService.create(userHTTPRequest);
     }
 }
