@@ -1,4 +1,4 @@
-package com.onlineshoppingsystem.project.data.cart.model;
+package com.onlineshoppingsystem.project.model;
 
 
 import com.onlineshoppingsystem.project.data.Product;
@@ -42,9 +42,4 @@ public class CartHTTPResponse {
             return new CartHTTPResponse(product, id);
         }
     }
-
-
-    // dodac wewnetrzny builder
-
-
  }

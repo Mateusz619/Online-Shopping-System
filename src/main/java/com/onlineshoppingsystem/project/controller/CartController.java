@@ -1,7 +1,11 @@
-package com.onlineshoppingsystem.project.data.cart;
+package com.onlineshoppingsystem.project.controller;
 
-import com.onlineshoppingsystem.project.data.cart.model.CartHTTPResponse;
+import com.onlineshoppingsystem.project.data.Cart;
+import com.onlineshoppingsystem.project.repository.CartRepository;
+import com.onlineshoppingsystem.project.service.CartService;
+import com.onlineshoppingsystem.project.model.CartHTTPResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,14 +19,10 @@ public class CartController {
         this.cartService = cartService;
     }
 
-//    @GetMapping("/cart/{id}")
-//    public CartHTTPResponse getCart(@PathVariable long id){
-//        return cartService.getCart(id);
-//    }
-    @GetMapping("/cart")
+    @GetMapping
     public List<CartHTTPResponse> getAllCart(){
         return cartService.getAllCart();
     }
-
+    Iterable<Cart> allId = CartRepository.findAllById(Id);
 
 }

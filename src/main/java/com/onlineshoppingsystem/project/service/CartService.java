@@ -1,9 +1,10 @@
-package com.onlineshoppingsystem.project.data.cart;
+package com.onlineshoppingsystem.project.service;
 
-import com.onlineshoppingsystem.project.data.cart.model.Cart;
-import com.onlineshoppingsystem.project.data.cart.model.CartHTTPResponse;
-import com.onlineshoppingsystem.project.data.cart.model.CartMapper;
+import com.onlineshoppingsystem.project.model.CartHTTPResponse;
+import com.onlineshoppingsystem.project.mapper.CartMapper;
 
+import com.onlineshoppingsystem.project.model.ProductHTTPResponse;
+import com.onlineshoppingsystem.project.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,18 +24,11 @@ public class CartService {
         this.cartRepository = cartRepository;
     }
 
-//    public CartHTTPResponse getCart( long id){
-//        Cart cart = cartRepository.findById(id).get();
-//        CartHTTPResponse response = CartMapper.map(cart);
-//        return response;
-//    }
-
     public List<CartHTTPResponse> getAllCart() {
         return stream(cartRepository.findAll().spliterator(), false)
-                .map(cart -> CartMapper.map(Cart.builder().build()))
+                //.map(x-> CartMapper.map())
+                .map(product -> CartMapper.map(product, ProductHTTPResponse.class))
                 .collect(Collectors.toList());
     }
-
-
 
 }
