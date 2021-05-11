@@ -1,4 +1,4 @@
-package model;
+package com.onlineshoppingsystem.project.model;
 
 import com.onlineshoppingsystem.project.data.User;
 
@@ -8,12 +8,16 @@ public class UserMapper {
                 .id(user.getId())
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .firstName(user.getFirstName())
+                .surname(user.getSurname())
                 .build();
     }
     public static User map(UserHTTPRequest user){
         return User.userBuilder()
                 .username(user.getUsername())
                 .password(user.getPassword())
+                .firstName(user.getFirstName())
+                .surname(user.getSurname())
                 .build();
     }
 }

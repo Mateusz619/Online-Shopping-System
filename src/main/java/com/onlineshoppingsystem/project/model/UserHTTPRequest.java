@@ -1,4 +1,4 @@
-package model;
+package com.onlineshoppingsystem.project.model;
 
 import lombok.Getter;
 import lombok.Setter;

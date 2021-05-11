@@ -1,4 +1,4 @@
-package model;
+package com.onlineshoppingsystem.project.model;
 
 import com.onlineshoppingsystem.project.data.User;
 import com.onlineshoppingsystem.project.repository.UserRepository;
@@ -25,7 +25,7 @@ public class UserService {
         return response;
     }
 
-    public List<UserHTTPResponse> getAllUsers(User user) {
+    public List<UserHTTPResponse> getAllUsers() {
         return stream(userRepository.findAll().spliterator(), false)
                 .map(x -> UserMapper.map(x))
                 .collect(Collectors.toList());
@@ -49,4 +49,5 @@ public class UserService {
         User user = UserMapper.map(userHTTPRequest);
         userRepository.save(user);
     }
+
 }

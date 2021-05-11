@@ -1,7 +1,6 @@
 package com.onlineshoppingsystem.project.controller;
 
 import com.onlineshoppingsystem.project.data.Product;
-import model.ProductDTO;
 import com.onlineshoppingsystem.project.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +24,9 @@ public class ProductController {
         return ResponseEntity.ok(productRepository.findAll());
     }
 
-    @PostMapping(value = "products")
-    public ResponseEntity saveProduct(@RequestBody ProductDTO productDTO) {
-        Product product = new Product(productDTO.getType(), productDTO.getName(), productDTO.getPrice(), productDTO.getQuantity());
-        return ResponseEntity.ok(productRepository.save(product));
-    }
+//    @PostMapping(value = "products")
+//    public ResponseEntity saveProduct(@RequestBody ProductDTO productDTO) {
+//        Product product = new Product(productDTO.getType(), productDTO.getName(), productDTO.getPrice(), productDTO.getQuantity());
+//        return ResponseEntity.ok(productRepository.save(product));
+//    }
 }
