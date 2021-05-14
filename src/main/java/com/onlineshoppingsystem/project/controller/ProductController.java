@@ -2,31 +2,45 @@ package com.onlineshoppingsystem.project.controller;
 
 import com.onlineshoppingsystem.project.data.Product;
 import com.onlineshoppingsystem.project.repository.ProductRepository;
+import com.onlineshoppingsystem.project.model.ProductHTTPRequest;
+import com.onlineshoppingsystem.project.model.ProductHTTPResponse;
+import com.onlineshoppingsystem.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 public class ProductController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductRepository productRepository;
-
-    @GetMapping(value = "product/{id}")
-    public ResponseEntity getProductById(@PathVariable Long id) {
-        return productRepository.findById(id)
-                .map(product -> ResponseEntity.ok(product))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping(value = "products")
-    public ResponseEntity getAllProducts() {
-        return ResponseEntity.ok(productRepository.findAll());
+    @GetMapping(value = "/product/{id}")
+    public ProductHTTPResponse getProductById(@PathVariable long id) {
+        return productService.getProductById(id);
     }
 
-//    @PostMapping(value = "products")
-//    public ResponseEntity saveProduct(@RequestBody ProductDTO productDTO) {
-//        Product product = new Product(productDTO.getType(), productDTO.getName(), productDTO.getPrice(), productDTO.getQuantity());
-//        return ResponseEntity.ok(productRepository.save(product));
-//    }
+    @GetMapping(value = "/products")
+    public List<ProductHTTPResponse> getAllProducts() {
+        return productService.getAllProducts();
+    }
+
+    @PostMapping(value = "/product")
+    public void saveProduct(@RequestBody ProductHTTPRequest productHTTPRequest) {
+        productService.saveProduct(productHTTPRequest);
+    }
+
+    @PutMapping(value = "/product/{id}")
+    public void updateProductById(@PathVariable long id, @RequestBody ProductHTTPRequest productHTTPRequest) {
+        productService.updateProductById(id, productHTTPRequest);
+    }
+
+    @DeleteMapping(value = "/product/{id}")
+    public boolean deleteProductById(@PathVariable long id) {
+        return productService.deleteProductById(id);
+    }
 }

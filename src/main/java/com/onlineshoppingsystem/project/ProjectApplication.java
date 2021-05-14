@@ -22,7 +22,8 @@ public class ProjectApplication {
 		return args -> {
 			productRepository.save(new Product("Laptop", "HP", 2500, 10));
 			userRepository.save(new User("sdsd","dsda","sdda","ewr"));
+			userRepository.save(new User("test", "test"));
+			productRepository.save(new Product("Laptop", "HP", 2500));
 		};
 	}
-
 }

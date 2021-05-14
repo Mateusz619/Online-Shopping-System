@@ -3,6 +3,8 @@ package com.onlineshoppingsystem.project.controller;
 import com.onlineshoppingsystem.project.model.UserHTTPRequest;
 import com.onlineshoppingsystem.project.model.UserHTTPResponse;
 import com.onlineshoppingsystem.project.model.UserService;
+import com.onlineshoppingsystem.project.data.User;
+import com.onlineshoppingsystem.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +13,12 @@ import java.util.List;
 @RestController
 public class UserController {
 
-
     private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
 
     @GetMapping(value = "users")
     public List<UserHTTPResponse> getAllUsers() {
@@ -38,6 +38,7 @@ public class UserController {
     public void updateByUserId(@PathVariable long id, @RequestBody UserHTTPRequest userHTTPRequest){
         userService.update(id, userHTTPRequest);
     }
+  
     @PostMapping(value = "user")
     public void saveUser(@RequestBody UserHTTPRequest userHTTPRequest){
         userService.create(userHTTPRequest);
