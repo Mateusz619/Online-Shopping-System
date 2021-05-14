@@ -1,5 +1,7 @@
 package com.onlineshoppingsystem.project.controller;
 
+import com.onlineshoppingsystem.project.data.Product;
+import com.onlineshoppingsystem.project.repository.ProductRepository;
 import com.onlineshoppingsystem.project.model.ProductHTTPRequest;
 import com.onlineshoppingsystem.project.model.ProductHTTPResponse;
 import com.onlineshoppingsystem.project.service.ProductService;
