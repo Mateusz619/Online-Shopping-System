@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity(name = "cart")
@@ -12,14 +13,12 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int quantity;
     private double total;
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "product_id")
-    private Product product;
+    private List<Product> product;
 
-    public Cart(int quantity, double total, Product product) {
-        this.quantity = quantity;
+    public Cart(double total, List<Product> product) {
         this.total = total;
         this.product = product;
     }

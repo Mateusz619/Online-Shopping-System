@@ -1,18 +1,17 @@
 package com.onlineshoppingsystem.project.data;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@Entity(name = "product")
+@Data
 @NoArgsConstructor
+@Entity(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_product")
     private long id;
     private String type;
     private String name;

@@ -2,9 +2,7 @@ package com.onlineshoppingsystem.project.controller;
 
 import com.onlineshoppingsystem.project.model.UserHTTPRequest;
 import com.onlineshoppingsystem.project.model.UserHTTPResponse;
-import com.onlineshoppingsystem.project.model.UserService;
-import com.onlineshoppingsystem.project.data.User;
-import com.onlineshoppingsystem.project.repository.UserRepository;
+import com.onlineshoppingsystem.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,27 +18,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "users")
-    public List<UserHTTPResponse> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    @GetMapping(value = "user/{id}")
+    @GetMapping(value = "/get/user/{id}")
     public UserHTTPResponse getUserById(@PathVariable long id){
         return userService.getUserById(id);
     }
 
-    @DeleteMapping(value = "delete/{id}")
-    public void deleteByUserId(@PathVariable long id){
-        userService.delete(id);
+    @GetMapping(value = "/get/users")
+    public List<UserHTTPResponse> getAllUsers() {
+        return userService.getAllUsers();
     }
-    @PutMapping(value = "update/{id}")
-    public void updateByUserId(@PathVariable long id, @RequestBody UserHTTPRequest userHTTPRequest){
-        userService.update(id, userHTTPRequest);
+
+    @PostMapping(value = "/save/user")
+    public long saveUser(@RequestBody UserHTTPRequest userHTTPRequest){
+        return userService.saveUser(userHTTPRequest);
     }
-  
-    @PostMapping(value = "user")
-    public void saveUser(@RequestBody UserHTTPRequest userHTTPRequest){
-        userService.create(userHTTPRequest);
+
+    @PutMapping(value = "/update/user/{id}")
+    public long updateUserById(@PathVariable long id, @RequestBody UserHTTPRequest userHTTPRequest){
+        return userService.updateUserById(id, userHTTPRequest);
+    }
+
+    @DeleteMapping(value = "/delete/user/{id}")
+    public boolean deleteUserById(@PathVariable long id){
+        return userService.deleteUserById(id);
     }
 }

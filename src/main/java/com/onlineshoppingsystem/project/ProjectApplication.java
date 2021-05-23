@@ -20,10 +20,10 @@ public class ProjectApplication {
 	@Bean
 	public ApplicationRunner init(ProductRepository productRepository, UserRepository userRepository){
 		return args -> {
-			productRepository.save(new Product("Laptop", "HP", 2500, 10));
-			userRepository.save(new User("sdsd","dsda","sdda","ewr"));
-			userRepository.save(new User("test", "test"));
-			productRepository.save(new Product("Laptop", "HP", 2500));
+			productRepository.save(new Product("Laptop", "Lenovo", 1500));
+			productRepository.save(new Product("Phone", "Samsung", 2500));
+			productRepository.save(new Product("Printer", "Epson", 3500));
+			productRepository.save(new Product("Mouse", "Logitech", 4500));
 		};
 	}
 }

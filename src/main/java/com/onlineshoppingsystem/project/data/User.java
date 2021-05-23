@@ -6,32 +6,35 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Entity(name = "User")
+@NoArgsConstructor
+@Entity(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_User")
+    @Column(name = "id_user")
     private long id;
     private String username;
     private String password;
     private String firstName;
-    private String surname;
+    private String lastName;
 
-    public User(){
-    }
-    public User(String username, String password, String firstName, String surname){
+    public User(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        this.surname = surname;
+        this.lastName = lastName;
     }
-    public static UserBuilder userBuilder(){return new UserBuilder();}
+
+    public static UserBuilder userBuilder() {
+        return new UserBuilder();
+    }
+
     public static final class UserBuilder {
         private long id;
         private String username;
         private String password;
         private String firstName;
-        private String surname;
+        private String lastName;
 
         private UserBuilder() {
         }
@@ -50,12 +53,14 @@ public class User {
             this.password = password;
             return this;
         }
+
         public UserBuilder firstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
-        public UserBuilder surname(String surname){
-            this.surname = surname;
+
+        public UserBuilder lastName(String lastName){
+            this.lastName = lastName;
             return this;
         }
 
@@ -65,7 +70,7 @@ public class User {
             user.setUsername(username);
             user.setPassword(password);
             user.setFirstName(firstName);
-            user.setSurname(surname);
+            user.setLastName(lastName);
             return user;
         }
     }
