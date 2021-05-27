@@ -16,7 +16,7 @@ import static java.util.stream.StreamSupport.stream;
 @Service
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
 
@@ -27,7 +27,7 @@ public class ProductService {
     public ProductHTTPResponse getProductById(long id) {
         return productRepository.findById(id)
                 .map(ProductMapper::map)
-                .orElseThrow(() -> new RuntimeException("NOT FOUND"));
+                .orElseThrow();
     }
 
     public List<ProductHTTPResponse> getAllProducts() {
@@ -36,15 +36,15 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public void saveProduct(ProductHTTPRequest productHTTPRequest) {
+    public long saveProduct(ProductHTTPRequest productHTTPRequest) {
         Product product = ProductMapper.map(productHTTPRequest);
-        productRepository.save(product);
+        return productRepository.save(product).getId();
     }
 
-    public void updateProductById(long id, ProductHTTPRequest productHTTPRequest) {
+    public long updateProductById(long id, ProductHTTPRequest productHTTPRequest) {
         Product product = ProductMapper.map(productHTTPRequest);
         product.setId(id);
-        productRepository.save(product);
+        return productRepository.save(product).getId();
     }
 
     public boolean deleteProductById(long id) {

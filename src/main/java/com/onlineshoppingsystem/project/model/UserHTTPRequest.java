@@ -9,13 +9,13 @@ public class UserHTTPRequest {
     private String username;
     private String password;
     private String firstName;
-    private String surname;
+    private String lastName;
 
-    public UserHTTPRequest(String username, String password,String firstName,String surname) {
+    public UserHTTPRequest(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        this.surname = surname;
+        this.lastName = lastName;
     }
 
     public static UserHTTPRequestBuilder builder() {
@@ -26,11 +26,10 @@ public class UserHTTPRequest {
         private String username;
         private String password;
         private String firstName;
-        private String surname;
+        private String lastName;
 
         private UserHTTPRequestBuilder() {
         }
-
 
         public UserHTTPRequestBuilder username(String username) {
             this.username = username;
@@ -41,17 +40,17 @@ public class UserHTTPRequest {
             this.password = password;
             return this;
         }
-        public UserHTTPRequestBuilder firstName(String firstName){
+        public UserHTTPRequestBuilder firstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
-        public UserHTTPRequestBuilder surname(String surname){
-            this.surname = surname;
+        public UserHTTPRequestBuilder lastName(String lastName) {
+            this.lastName = lastName;
             return this;
         }
 
         public UserHTTPRequest build() {
-            return new UserHTTPRequest(username, password, firstName, surname);
+            return new UserHTTPRequest(username, password, firstName, lastName);
         }
     }
 }
