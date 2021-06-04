@@ -12,6 +12,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .role(user.getRole())
                 .build();
     }
     public static User map(UserHTTPRequest userHTTPRequest){
@@ -20,6 +21,7 @@ public class UserMapper {
                 .password(userHTTPRequest.getPassword())
                 .firstName(userHTTPRequest.getFirstName())
                 .lastName(userHTTPRequest.getLastName())
+                .role(userHTTPRequest.getRole())
                 .build();
     }
 }

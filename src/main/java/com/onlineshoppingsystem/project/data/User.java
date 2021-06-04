@@ -1,5 +1,6 @@
 package com.onlineshoppingsystem.project.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,12 +18,15 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public User(String username, String password, String firstName, String lastName) {
+    public User(String username, String password, String firstName, String lastName, Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public static UserBuilder userBuilder() {
@@ -35,6 +39,7 @@ public class User {
         private String password;
         private String firstName;
         private String lastName;
+        private Role role;
 
         private UserBuilder() {
         }
@@ -59,8 +64,13 @@ public class User {
             return this;
         }
 
-        public UserBuilder lastName(String lastName){
+        public UserBuilder lastName(String lastName) {
             this.lastName = lastName;
+            return this;
+        }
+
+        public UserBuilder role(Role role) {
+            this.role = role;
             return this;
         }
 
@@ -71,6 +81,7 @@ public class User {
             user.setPassword(password);
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            user.setRole(role);
             return user;
         }
     }

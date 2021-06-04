@@ -1,4 +1,5 @@
 package com.onlineshoppingsystem.project.model;
+import com.onlineshoppingsystem.project.data.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +11,15 @@ public class UserHTTPResponse {
     private String password;
     private String firstName;
     private String lastName;
+    private Role role;
 
-    public UserHTTPResponse(String username, String password, long id, String firstName, String lastName) {
+    public UserHTTPResponse(long id, String username, String password, String firstName, String lastName, Role role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public static UserHTTPResponseBuilder builder() {
@@ -29,8 +32,14 @@ public class UserHTTPResponse {
         private String password;
         private String firstName;
         private String lastName;
+        private Role role;
 
         private UserHTTPResponseBuilder() {
+        }
+
+        public UserHTTPResponseBuilder id(long id) {
+            this.id = id;
+            return this;
         }
 
         public UserHTTPResponseBuilder username(String username) {
@@ -40,11 +49,6 @@ public class UserHTTPResponse {
 
         public UserHTTPResponseBuilder password(String password) {
             this.password = password;
-            return this;
-        }
-
-        public UserHTTPResponseBuilder id(long id) {
-            this.id = id;
             return this;
         }
 
@@ -58,14 +62,13 @@ public class UserHTTPResponse {
             return this;
         }
 
+        public UserHTTPResponseBuilder role(Role role) {
+            this.role = role;
+            return this;
+        }
+
         public UserHTTPResponse build() {
-            UserHTTPResponse userHTTPResponse = new UserHTTPResponse(username, password, id, firstName, lastName);
-            userHTTPResponse.setUsername(username);
-            userHTTPResponse.setPassword(password);
-            userHTTPResponse.setId(id);
-            userHTTPResponse.setFirstName(firstName);
-            userHTTPResponse.setLastName(lastName);
-            return userHTTPResponse;
+            return new UserHTTPResponse(id, username, password, firstName, lastName, role);
         }
     }
 }
