@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head>
+    <title>Admin management</title>
+    <link rel="stylesheet" type="text/css" th:href="@{admin.css}">
+</head>
+<body>
+<div class="container">
+
+    <button type="button" class="btn1" onclick="logOut()">logOut</button>
+
+    <div class="card">
+        <div class="inner-box" id="card">
+            <div class="card-front">
+                <h2>USERS MANAGEMENT</h2>
+                <ol>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+
+                </ol>
+                <button type="button" class="btn" onclick="openProducts()">Products</button>
+            </div>
+            <div class="card-back">
+                <h2>PRODUCTS MANAGEMENT</h2>
+                <ol>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+                    <li>pierwszy <input type="submit" value="MODIFY	" class="przycisk"><input type="submit" value="DELETE" class="przycisk"></li>
+
+                </ol>
+                <button type="button" class="btn" onclick="openUsers()">Users</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+		var card = document.getElementById("card");
+		function openProducts(){
+			card.style.transform = "rotateY(-180deg)";
+		}
+		function openUsers(){
+			card.style.transform = "rotateY(0deg)";
+		}
+		</script>
+</body>
+</html>
