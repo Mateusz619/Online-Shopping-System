@@ -1,14 +1,11 @@
 package com.onlineshoppingsystem.project;
 
 import com.onlineshoppingsystem.project.data.Product;
-import com.onlineshoppingsystem.project.data.User;
 import com.onlineshoppingsystem.project.repository.ProductRepository;
 import com.onlineshoppingsystem.project.repository.UserRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
 

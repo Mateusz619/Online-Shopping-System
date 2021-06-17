@@ -3,6 +3,9 @@ import com.onlineshoppingsystem.project.data.Role;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @Getter
 @Setter
 public class UserHTTPResponse {
@@ -11,6 +14,7 @@ public class UserHTTPResponse {
     private String password;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public UserHTTPResponse(long id, String username, String password, String firstName, String lastName, Role role) {

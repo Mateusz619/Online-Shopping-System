@@ -1,6 +1,5 @@
 package com.onlineshoppingsystem.project.data;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +8,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity(name = "user")
-public class User {
+public class UserInternal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -21,7 +20,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String username, String password, String firstName, String lastName, Role role) {
+    public UserInternal(String username, String password, String firstName, String lastName, Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -74,8 +73,8 @@ public class User {
             return this;
         }
 
-        public User build() {
-            User user = new User();
+        public UserInternal build() {
+            UserInternal user = new UserInternal();
             user.setId(id);
             user.setUsername(username);
             user.setPassword(password);

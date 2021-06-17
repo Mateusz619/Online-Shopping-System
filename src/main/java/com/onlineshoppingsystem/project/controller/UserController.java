@@ -28,7 +28,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping(value = "/save/user")
+    @PostMapping(value = "/signup")
     public long saveUser(@RequestBody UserHTTPRequest userHTTPRequest){
         return userService.saveUser(userHTTPRequest);
     }
