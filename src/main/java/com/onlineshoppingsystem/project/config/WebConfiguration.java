@@ -1,5 +1,6 @@
 package com.onlineshoppingsystem.project.config;
 
+import com.onlineshoppingsystem.project.data.Role;
 import com.onlineshoppingsystem.project.data.UserInternal;
 import com.onlineshoppingsystem.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,9 @@ public class WebConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public void init() {
-//        userRepository.save(new UserInternal())
-//    }
+    @Bean
+    public void initializer() {
+        userRepository.save(new UserInternal("jan.kowalski", bCryptPasswordEncoder().encode("user"), "Jan", "Kowalski", Role.ROLE_CUSTOMER));
+        userRepository.save(new UserInternal("adam.nowak", bCryptPasswordEncoder().encode("admin"), "Adam", "Nowak", Role.ROLE_ADMINISTRATOR));
+    }
 }

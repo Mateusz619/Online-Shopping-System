@@ -18,12 +18,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/get/user/{id}")
+    @GetMapping(value = "/user/get/{id}")
     public UserHTTPResponse getUserById(@PathVariable long id){
         return userService.getUserById(id);
     }
 
-    @GetMapping(value = "/get/users")
+    @GetMapping(value = "/user/get")
     public List<UserHTTPResponse> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -33,12 +33,12 @@ public class UserController {
         return userService.saveUser(userHTTPRequest);
     }
 
-    @PutMapping(value = "/update/user/{id}")
+    @PutMapping(value = "/user/update/{id}")
     public long updateUserById(@PathVariable long id, @RequestBody UserHTTPRequest userHTTPRequest){
         return userService.updateUserById(id, userHTTPRequest);
     }
 
-    @DeleteMapping(value = "/delete/user/{id}")
+    @DeleteMapping(value = "/user/delete/{id}")
     public boolean deleteUserById(@PathVariable long id){
         return userService.deleteUserById(id);
     }

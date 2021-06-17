@@ -19,27 +19,27 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping(value = "/get/product/{id}")
+    @GetMapping(value = "/product/get/{id}")
     public ProductHTTPResponse getProductById(@PathVariable long id) {
         return productService.getProductById(id);
     }
 
-    @GetMapping(value = "/get/products")
+    @GetMapping(value = "/product/get")
     public List<ProductHTTPResponse> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    @PostMapping(value = "/save/product")
+    @PostMapping(value = "/product/save")
     public long saveProduct(@RequestBody ProductHTTPRequest productHTTPRequest) {
         return productService.saveProduct(productHTTPRequest);
     }
 
-    @PutMapping(value = "/update/product/{id}")
+    @PutMapping(value = "/product/update/{id}")
     public long updateProductById(@PathVariable long id, @RequestBody ProductHTTPRequest productHTTPRequest) {
         return productService.updateProductById(id, productHTTPRequest);
     }
 
-    @DeleteMapping(value = "/delete/product/{id}")
+    @DeleteMapping(value = "/product/delete/{id}")
     public boolean deleteProductById(@PathVariable long id) {
         return productService.deleteProductById(id);
     }

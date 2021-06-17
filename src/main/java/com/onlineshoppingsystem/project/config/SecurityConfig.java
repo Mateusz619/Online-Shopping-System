@@ -27,9 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/console/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/signup").permitAll()
-                .antMatchers(HttpMethod.GET, "/get/products").hasRole("CUSTOMER")
+                .antMatchers("/user/**").hasRole("ADMINISTRATOR")
+                .antMatchers("/cart/**").hasRole("CUSTOMER")
+                .antMatchers(HttpMethod.GET, "/product/get").permitAll()
+                .antMatchers(HttpMethod.GET,"/product/get/{id}").hasAnyRole("ADMINISTRATOR","CUSTOMER")
+                .antMatchers("/product/**").hasRole("ADMINISTRATOR")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
