@@ -1,7 +1,11 @@
 package com.onlineshoppingsystem.project.model;
 
+import com.onlineshoppingsystem.project.data.Role;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Getter
 @Setter
@@ -10,12 +14,15 @@ public class UserHTTPRequest {
     private String password;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public UserHTTPRequest(String username, String password, String firstName, String lastName) {
+    public UserHTTPRequest(String username, String password, String firstName, String lastName, Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public static UserHTTPRequestBuilder builder() {
@@ -27,6 +34,7 @@ public class UserHTTPRequest {
         private String password;
         private String firstName;
         private String lastName;
+        private Role role;
 
         private UserHTTPRequestBuilder() {
         }
@@ -40,17 +48,24 @@ public class UserHTTPRequest {
             this.password = password;
             return this;
         }
+
         public UserHTTPRequestBuilder firstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
+
         public UserHTTPRequestBuilder lastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
 
+        public UserHTTPRequestBuilder role(Role role) {
+            this.role = role;
+            return this;
+        }
+
         public UserHTTPRequest build() {
-            return new UserHTTPRequest(username, password, firstName, lastName);
+            return new UserHTTPRequest(username, password, firstName, lastName, role);
         }
     }
 }

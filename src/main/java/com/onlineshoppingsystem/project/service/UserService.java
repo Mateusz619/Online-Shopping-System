@@ -1,14 +1,18 @@
 package com.onlineshoppingsystem.project.service;
 
-import com.onlineshoppingsystem.project.data.User;
+import com.onlineshoppingsystem.project.data.UserInternal;
 import com.onlineshoppingsystem.project.mapper.UserMapper;
 import com.onlineshoppingsystem.project.model.UserHTTPRequest;
 import com.onlineshoppingsystem.project.model.UserHTTPResponse;
 import com.onlineshoppingsystem.project.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.stream.StreamSupport.stream;
@@ -16,10 +20,17 @@ import static java.util.stream.StreamSupport.stream;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    UserService(UserRepository userRepository) {
+    UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public UserInternal getUserByName(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     public UserHTTPResponse getUserById(long id) {
@@ -35,12 +46,18 @@ public class UserService {
     }
 
     public long saveUser(UserHTTPRequest userHTTPRequest) {
-        User user = UserMapper.map(userHTTPRequest);
+        Optional<UserInternal> checkUser = userRepository.findByUsername(userHTTPRequest.getUsername());
+        if (checkUser.isPresent()) {
+            throw new RuntimeException("User already registered. Please use different username.");
+        }
+
+        UserInternal user = UserMapper.map(userHTTPRequest);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user).getId();
     }
 
     public long updateUserById(long id, UserHTTPRequest userHTTPRequest) {
-        User user = UserMapper.map(userHTTPRequest);
+        UserInternal user = UserMapper.map(userHTTPRequest);
         user.setId(id);
         return userRepository.save(user).getId();
 

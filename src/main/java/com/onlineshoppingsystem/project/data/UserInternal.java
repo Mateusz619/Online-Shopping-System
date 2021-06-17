@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity(name = "user")
-public class User {
+public class UserInternal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
@@ -17,12 +17,15 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public User(String username, String password, String firstName, String lastName) {
+    public UserInternal(String username, String password, String firstName, String lastName, Role role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 
     public static UserBuilder userBuilder() {
@@ -35,6 +38,7 @@ public class User {
         private String password;
         private String firstName;
         private String lastName;
+        private Role role;
 
         private UserBuilder() {
         }
@@ -59,18 +63,24 @@ public class User {
             return this;
         }
 
-        public UserBuilder lastName(String lastName){
+        public UserBuilder lastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public User build() {
-            User user = new User();
+        public UserBuilder role(Role role) {
+            this.role = role;
+            return this;
+        }
+
+        public UserInternal build() {
+            UserInternal user = new UserInternal();
             user.setId(id);
             user.setUsername(username);
             user.setPassword(password);
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            user.setRole(role);
             return user;
         }
     }

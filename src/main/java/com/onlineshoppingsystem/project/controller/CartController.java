@@ -18,27 +18,27 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping(value = "/carts")
+    @GetMapping(value = "/cart/get")
     public List<CartHTTPResponse> getAllCarts() {
         return cartService.getAllCarts();
     }
 
-    @GetMapping(value = "/cart/{id}")
+    @GetMapping(value = "/cart/get/{id}")
     public CartHTTPResponse getCartById(@PathVariable long id) {
         return cartService.getCartById(id);
     }
 
-    @PostMapping(value = "/save/cart")
+    @PostMapping(value = "/cart/save")
     public long saveCart() {
         return cartService.saveCart();
     }
 
-    @PutMapping(value = "/update/cart/{cartId}/product/{productId}")
+    @PutMapping(value = "/cart/update/{cartId}/product/{productId}")
     public long updateCart(@PathVariable long cartId, @PathVariable long productId) {
         return cartService.updateCart(cartId, productId);
     }
 
-    @DeleteMapping(value = "/delete/cart/{cartId}/product/{productId}")
+    @DeleteMapping(value = "/cart/delete/{cartId}/product/{productId}")
     public Optional<Object> deleteProductById(@PathVariable long cartId, @PathVariable long productId) {
         return cartService.deleteProduct(cartId, productId);
     }
